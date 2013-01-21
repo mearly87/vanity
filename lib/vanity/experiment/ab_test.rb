@@ -434,6 +434,8 @@ module Vanity
           @metrics = [metric]
         end
         @metrics.each do |metric|
+          puts "*"*80
+          puts metric.inspect
           metric.hook &method(:track!)
         end
       end
