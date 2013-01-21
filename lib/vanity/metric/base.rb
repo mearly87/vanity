@@ -235,9 +235,12 @@ module Vanity
     end
 
     def call_hooks(timestamp, identity, values)
+      experiments = {}
       @hooks.each do |hook|
-        hook.call @id, timestamp, values.first || 1
+        experiment, alternative ,identity = hook.call @id, timestamp, values.first || 1
+        experiments[experiment] = alternative
       end
+      connection.metric_track @id, timestamp, identity, values, experiments
     end
 
   end

@@ -450,6 +450,7 @@ module Vanity
           index = alternative_for(identity)
           connection.ab_add_conversion @id, index, identity, count
           check_completion!
+          return self.id, index, identity
         end
       end
 

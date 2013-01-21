@@ -52,6 +52,11 @@ module Vanity
         fail "Not implemented"
       end
 
+      # Track metric data.
+      def event_track(metric, timestamp, identity, values, experiments)
+        fail "Not implemented"
+      end
+
       # Returns all the metric values between from and to time instances
       # (inclusive). Returns pairs of date and total count for that date.
       def metric_values(metric, from, to)
