@@ -433,9 +433,9 @@ module Vanity
           metric = @playground.metrics[id] ||= Vanity::Metric.new(@playground, name)
           @metrics = [metric]
         end
-        @metrics.each do |metric|
+        @metrics.uniq.each do |metric|
           puts "*"*80
-          puts metric.inspect
+          puts metric
           metric.hook &method(:track!)
         end
       end
