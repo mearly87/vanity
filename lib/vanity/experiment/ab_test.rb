@@ -434,7 +434,7 @@ module Vanity
           @metrics = [metric]
         end
         puts "-"*80
-        @metrics.uniq {|metric| metric.inspect.to_sym }.each do |metric|
+        @metrics.each do |metric|
           puts metric
           metric.hook &method(:track!)
         end

@@ -139,7 +139,11 @@ module Vanity
         @logger.info "Vanity: loading experiments from #{load_path}"
         Dir[File.join(load_path, "*.rb")].each do |file|
           experiment = Experiment::Base.load(self, @loading, file)
-          experiment.save
+          puts "Experiment: " + experiment.inspect
+          unless experiments.has_key?(experiment.id)
+            experiments[experiment.id] = experiment
+            experiment.save
+          end
         end
       end
       @experiments
