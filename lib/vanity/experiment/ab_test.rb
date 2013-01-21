@@ -433,11 +433,12 @@ module Vanity
           metric = @playground.metrics[id] ||= Vanity::Metric.new(@playground, name)
           @metrics = [metric]
         end
-        @metrics.uniq.each do |metric|
-          puts "*"*80
+        puts "-"*80
+        @metrics.uniq {|metric| metric.to_sym }.each do |metric|
           puts metric
           metric.hook &method(:track!)
         end
+        puts "-"*80
       end
 
       # Called when tracking associated metric.
