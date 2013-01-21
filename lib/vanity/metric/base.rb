@@ -240,7 +240,7 @@ module Vanity
         experiment, alternative ,identity = hook.call @id, timestamp, values.first || 1
         experiments[experiment] = alternative
       end
-      connection.metric_track @id, timestamp, identity, values, experiments
+      connection.event_track @id, timestamp, identity, values, experiments
     end
 
   end
