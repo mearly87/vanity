@@ -93,7 +93,7 @@ module Vanity
 
       # Track metric data.
       def event_track(metric, timestamp, identity, values, experiments)
-        @events.insert({metric: metric, timestamp: timestamp, values: values, identity: identity}.merge(experiments))
+        @events.insert({metric: metric, timestamp: timestamp, values: values, identity: identity, experiments: experiments})
       end
 
       def metric_values(metric, from, to)

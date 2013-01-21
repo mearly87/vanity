@@ -236,11 +236,20 @@ module Vanity
 
     def call_hooks(timestamp, identity, values)
       experiments = {}
+      identity = default_identify
       @hooks.each do |hook|
-        experiment, alternative ,identity = hook.call @id, timestamp, values.first || 1
+        experiment, alternative = hook.call @id, timestamp, values.first || 1
         experiments[experiment] = alternative
       end
       connection.event_track @id, timestamp, identity, values, experiments
+    end
+
+    protected
+    def default_identify
+      context = Vanity.context
+      raise "No Vanity.context" unless context
+      raise "Vanity.context does not respond to vanity_identity" unless context.respond_to?(:vanity_identity)
+      context.send(:vanity_identity) or raise "Vanity.context.vanity_identity - no identity"
     end
 
   end
