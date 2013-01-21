@@ -54,6 +54,7 @@ module Vanity
         @mongo.connect
         database = @mongo.db(@options[:database])
         database.authenticate @options[:username], @options[:password], true if @options[:username]
+        @events = database.collection("vanity.events")
         @metrics = database.collection("vanity.metrics")
         @experiments = database.collection("vanity.experiments")
         @participants = database.collection("vanity.participants")
@@ -88,6 +89,7 @@ module Vanity
           inc["data.#{timestamp.to_date}.#{i}"] = v
         end
         @metrics.update({ :_id=>metric }, { "$inc"=>inc, "$set"=>{ :last_update_at=>Time.now } }, :upsert=>true)
+        @events.insert({metric: metirc.id, timestamp: timestamp, values: values, identity: identity})
       end
 
       def metric_values(metric, from, to)
