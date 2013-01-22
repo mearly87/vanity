@@ -86,7 +86,9 @@ module Vanity
       def metric_track(metric, timestamp, identity, values)
         inc = {}
         values.each_with_index do |v,i|
-          inc["data.#{timestamp.to_date}.#{i}"] = v
+          if v.is_a? Numeric
+            inc["data.#{timestamp.to_date}.#{i}"] = v
+          end
         end
         @metrics.update({ :_id=>metric }, { "$inc"=>inc, "$set"=>{ :last_update_at=>Time.now } }, :upsert=>true)
       end
