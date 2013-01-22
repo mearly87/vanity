@@ -19,11 +19,11 @@ module Vanity
         klass = Experiment.const_get(type.to_s.gsub(/\/(.?)/) { "::#{$1.upcase}" }.gsub(/(?:^|_)(.)/) { $1.upcase })
         experiment = klass.new(playground, @experiment_id, name, options)
         experiment.instance_eval &block
-        unless  playground.experiments.has_key?(@experiment_id)
+        unless playground.experiments.has_key?(@experiment_id)
           playground.experiments[@experiment_id] = experiment
           experiment.save
         end
-
+        return experiment
       end
 
       def new_binding(playground, id)

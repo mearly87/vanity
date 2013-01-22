@@ -205,6 +205,11 @@ module Vanity
       @description
     end
 
+    def detailed(enabled = nil)
+      @detailed = enabled if enabled
+      @detailed
+    end
+
     # Given two arguments, a start date and an end date (inclusive), returns an
     # array of measurements.  All metrics must implement this method.
     def values(from, to)
@@ -241,7 +246,9 @@ module Vanity
         experiment, alternative = hook.call @id, timestamp, values.first || 1
         experiments[experiment] = alternative
       end
-      connection.event_track @id, timestamp, identity, values, experiments
+      if detailed
+        connection.event_track @id, timestamp, identity, values, experiments
+      end
     end
 
     protected

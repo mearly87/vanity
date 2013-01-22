@@ -52,7 +52,7 @@ module Vanity
         fail "Not implemented"
       end
 
-      # Track metric data.
+      # Track event data.
       def event_track(metric, timestamp, identity, values, experiments)
         fail "Not implemented"
       end
