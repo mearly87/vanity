@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mearly-vanity (1.8.0)
+    vanity (1.8.0)
       redis (~> 2.0)
       redis-namespace (~> 1.0.0)
 
@@ -94,7 +94,6 @@ DEPENDENCIES
   bson_ext
   garb
   jekyll
-  mearly-vanity!
   mocha
   mongo
   mysql
@@ -104,5 +103,6 @@ DEPENDENCIES
   rake
   shoulda
   timecop
+  vanity!
   webmock
   yard
